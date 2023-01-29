@@ -1,14 +1,8 @@
-#include <mlx.h>
+#include "mlx.h"
 #include <math.h>
 #include <stdio.h>
 #include <complex.h>
-
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
+#include <curses.h>
 
 int	main(void)
 {
@@ -17,65 +11,44 @@ int	main(void)
 	double 	tmp;
 	double  Xc;
 	double 	Yc;
-	int x, y;
+	double x, y;
 	int	color = 0x0000FF00;
 	// INIT A WINDOW
-	mlx = mlx_init();
+	 mlx = mlx_init();
 	// INIT A WINDOW
-	win = mlx_new_window(mlx, 800, 800, "Oussama");
+	win = mlx_new_window(mlx, 400, 400, "Oussama");
 
-	x = -1;
-	while (++x <= 1300)
+	y = 0;
+	while (y <= 400)
 	{
-		int y = -1;
-		while (++y <= 1300)
+		Yc = 2 - (y / 100);
+		x = 0;
+		while (x <= 400)
 		{
-			int	Zr = 0;
-			int	Zi = 0;
+			Xc = -2 + (x / 100);
+			//printf(">>>>>>>>>>>> (%f, %f)\n", Xc, Yc);
+			double	Zr = 0;
+			double	Zi = 0;
 
-			Xc = (x - 200) / 100;
-			Yc = (y - 200) / 100;
 			int	i = -1;
-			while (++i < 300)
+			while (++i < 1000)
 			{
 				tmp = Zr;
 				Zr = (Zr * Zr) - (Zi * Zi) + Xc;
 				Zi = (2 * tmp * Zi) + Yc;
-		//		printf("Zr => %d\n", Zr);
-		//		printf("Zi => %d\n", Zi);
-//				printf("|z| => %d\n", (Zr * Zr) + (Zi * Zi));
-				if ((Zr * Zr) + (Zi * Zi) > 2)
+				if ((Zr * Zr) + (Zi * Zi) > 4)
 					break;
 			}
-//			printf("i => %d\n", i);
-			if (i == 300)
-				mlx_pixel_put(mlx, win, x, y, create_trgb(0, 255, 0, 0));
-			else 
-				mlx_pixel_put(mlx, win, x, y, create_trgb(0, 255, 0, 255));
-		//	Yc += 0.01;
+	//		printf("i => %d\n", i);
+			if (i == 1000)
+				mlx_pixel_put(mlx, win, x, y, color);
+			x += 1;
 		}
-		//Xc += 0.01;
+		printf("\n");
+		y += 1;
 	}
-	//	mlx_put_image_to_window(mlx, win, image, 100, 100);
-	// TRIANGLE
-	/*int	j = -1;
-	while (++j <= 100)
-	{
-		int i = -1;
-		while (++i <= 200)
-			mlx_pixel_put(mlx, win, i, j, 0x0000FF00);
-	}*/
-	// CIRCLES
-//	int	 i  = 0;
-//	while (i <= 1000)
-//	{
-//		mlx_pixel_put(mlx, img, i, i * sin(i), 0x0000FF00);
-//		i++;
-//	}
-//	i = -1;
-//	while (++i <= 180)
-//		mlx_pixel_put(mlx, img, i, sin(i) * 30, 0x0000FF00);
 	mlx_loop(mlx);
+	//	mlx_put_image_to_window(mlx, win, image, 100, 100);
 }
 
 
