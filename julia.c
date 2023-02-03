@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <mlx.h>
 
 int	main(void)
 {
@@ -8,33 +9,35 @@ int	main(void)
 	double x, y;
 	int	i;
 	double Cr, Ci;
+	double tmp;
 
-	Cr = 0;
-	Ci = 0;
-	y = -1;
-	while (++y < 40)
+	void	*mlx = mlx_init();
+	void	*win = mlx_new_window(mlx, 800, 800, "oussama");
+	Cr = 0.3;
+	Ci = 0.5;
+	x = -1;
+	while (++x < 800)
 	{
-		Yc = -2 + (y / 10);
-		x = -1;
-		while (++x < 40)
+		Xc = -2 + (x / 200);
+		y = -1;
+		while (++y < 800)
 		{
-			Xc = 2 + (x / 10);
-			Zr = Yc;
-			Zi = Xc;
+			Yc = 2 - (y / 200);
+			Zr = Xc;
+			Zi = Yc;
 			i = -1;
-			while (++i < 10 && (Zr * Zr) + (Zi * Zi) < 4)
+			printf("x => %.1f\ny => %.1f\n", Xc, Yc);
+			while (++i < 100 && (Zr * Zr) + (Zi * Zi) < 4)
 			{
-				double tmp = Zr;
+				tmp = Zr;
 				Zr = (Zr * Zr) - (Zi * Zi) + Cr;
 				Zi = 2 * tmp * Zi + Ci;
 			}
-//			printf("Zr => %f\nZi => %f\n", Zr, Zi);
-			if (i == 10)
-				printf("*");
-			else
-				printf(" ");
+			//printf("Zr => %f\nZi => %f\n", Zr, Zi);
+			if (i == 100)
+				mlx_pixel_put(mlx, win, x, y, 0x00FF0000);		
 		}
-		printf("\n");
 	}
+	mlx_loop(mlx);
 	return (0);
 }
