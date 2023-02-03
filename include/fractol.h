@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/01 19:46:47 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:45:44 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define DEV "==================== (MADE BY OEZZAOU) ======================"
 # define MANDEL "1|_Mandelbrot fractol ====> ./fractal 1"
 # define JULIA "2|_Julia fractol      ====> ./fractal 2 [ARG1] [ARG2]"
-# include <mlx.h>
+# include "mlx.h"
 # include "ft_printf.h"
 # include <stdio.h>
 

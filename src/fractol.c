@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/01 19:54:18 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:29:12 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -22,6 +22,7 @@ int	main(int ac, char **av)
 		return (display_options(), EXIT_SUCCESS);
 	if (ac == 2 && ft_atoi(av[1]) == 1)
 		display_mandelbrot_fractal();
+//	mlx_pixel_put(mlx, win, 0, 0, 0x000000FF);
 //	mlx_loop(mlx);
 	return (EXIT_SUCCESS);
 }
