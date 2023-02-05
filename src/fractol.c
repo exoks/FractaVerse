@@ -6,24 +6,25 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/03 18:29:12 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:50:34 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
 int	main(int ac, char **av)
 {
-//	void	*mlx;
-//	void	*win;
+	void	*mlx;
+	void	*win;
 
-//	mlx = mlx_init();
-//	win = mlx_new_window(mlx, 1300, 700, "FRACTOL");
-	if (ac == 1)
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 800, 800, "FRACTOL");
+	if (ac == 1 || (ac == 2 && ft_atoi(av[1]) == 2))
 		return (display_options(), EXIT_SUCCESS);
 	if (ac == 2 && ft_atoi(av[1]) == 1)
-		display_mandelbrot_fractal();
-//	mlx_pixel_put(mlx, win, 0, 0, 0x000000FF);
-//	mlx_loop(mlx);
+		display_mandelbrot_fractal(mlx, win);
+	else
+		display_julia_fractal(mlx, win, 0.3, 0.5);
+	mlx_loop(mlx);
 	return (EXIT_SUCCESS);
 }
 /*int	main(void)
