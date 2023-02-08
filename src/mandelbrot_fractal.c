@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/04 19:53:19 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/07 16:26:20 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "fractol.h"
@@ -27,25 +27,26 @@ void	display_mandelbrot_fractal(void *mlx, void *win)
 
 //	step = 0.1;
 	xy[0] = -1;
-	while (++xy[0] <= 800)
+	while (++xy[0] <= 1200)
 	{
-		xyc[0] = -2.5 + (xy[0] / 200);
+		xyc[0] = -2 + (xy[0] / 300);
 		xy[1] = -1;
-		while (++xy[1] <= 800)
+		while (++xy[1] <= 1200)
 		{
-			xyc[1] = -2 + (xy[1] / 200);
+			xyc[1] = -2 + (xy[1] / 300);
 		//	printf("(%.2f, %.2f)\n", xyc[0], xyc[1]);
 			zr = 0;
 			zi = 0;
 			iter  = -1;
-			while (++iter < 1000 && (zr * zr) + (zi * zi) < 4)
+			while (++iter < 255 && (zr * zr) + (zi * zi) < 4)
 			{
 				xyc[2] = zr;
 				zr = (zr * zr) - (zi * zi) + xyc[0];
 				zi = 2 * zi * xyc[2] + xyc[1];
 			}
-			if (iter == 1000)
-				mlx_pixel_put(mlx, win, xy[0], xy[1], 0x00FF000);
+//			printf("=> %d\n", iter);
+			if (iter != 255)
+				mlx_pixel_put(mlx, win, xy[0], xy[1], create_trgb(0, iter, 255, 255 - iter));
 		}
 	}
 }

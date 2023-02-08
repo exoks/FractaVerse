@@ -6,7 +6,7 @@
 #    By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/28 21:14:18 by oezzaou           #+#    #+#              #
-#    Updated: 2023/02/04 19:07:09 by oezzaou          ###   ########.fr        #
+#    Updated: 2023/02/08 18:07:01 by oezzaou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #           Compiler               #
 ####################################
 CC = gcc
-CFLAGS =
+CFLAGS = 
 # THIS FLAGS USED FROM THE LINKDER IT'S MUST BE USED WHEN LINKING OBJECTS
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -26,7 +26,7 @@ OBJDIR = obj
 SRCDIR = src
 INC = -I include/ -I ft_printf/include -I ft_printf/libft
 MLX_LIB = include/libmlx.a
-SRCS := fractol fractol_options mandelbrot_fractal julia_fractal
+SRCS := fractol fractol_options mandelbrot_fractal julia_fractal fractol_utils
 OBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCS)))
 SRCS := $(addprefix $(SRCDIR)/, $(addsuffix .c, $(SRCS)))
 LIBFTPRINTF = ft_printf/libftprintf.a
@@ -61,6 +61,7 @@ re: fclean all
 
 test: 
 	./$(NAME) 2 3
+
 clean:
 	@rm -rf $(OBJDIR)
 	@make -C ft_printf/ clean

@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:48:56 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/04 19:45:15 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:41:09 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -18,7 +18,7 @@ void	display_julia_fractal(void *mlx, void *win, double xc, double yc)
 	double	i;
 	double step;
 
-	step = 0.005;
+	step = 0.0033;
 	xyc[0] = -2;
 	while (xyc[0] <= 2)
 	{

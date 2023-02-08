@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/04 19:22:25 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/08 18:17:16 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@
 # include "ft_printf.h"
 # include <stdio.h>
 
+typedef struct s_var
+{
+	void	*mlx;
+	void	*win;
+}				t_var;
+
+typedef struct s_img
+{
+	void	*addr;
+	void	*img;
+	int		line_len;
+	int		bpp;
+	int		endian;
+}				t_img;
+
+void	mlx_pixel_put_in_img(t_img img, int x, int y, int color);
 void	display_options(void);
 void	display_mandelbrot_fractal(void *mlx, void *win);
 void    display_julia_fractal(void *mlx, void *win, double xc, double yc);
