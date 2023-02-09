@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/08 20:04:28 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/09 15:47:00 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -20,11 +20,11 @@ int	main(int ac, char **av)
 	var.win = mlx_new_window(var.mlx, 1200, 1200, "FRACTAL");
 	img.img = mlx_new_image(var.mlx, 1200, 1200);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-/*	if (ac == 1 || (ac == 2 && ft_atoi(av[1]) == 2))
+	if (ac == 1 || (ac == 2 && ft_atoi(av[1]) == 2))
 		return (display_options(), EXIT_SUCCESS);
 	if (ac == 2 && ft_atoi(av[1]) == 1)
-		display_mandelbrot_fractal(mlx, win);
-	else
+		display_mandelbrot_fractal(&var, &img);
+	/*else
 		display_julia_fractal(mlx, win, 0.355, 0.355);*/
 	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
 	mlx_loop(var.mlx);
