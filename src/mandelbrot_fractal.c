@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/11 13:00:07 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:46:15 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "fractol.h"
@@ -16,7 +16,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	display_mandelbrot_fractal(t_img *img)
+void	display_mandelbrot_fractal(t_img *img, double rx, double ry)
 {
 	double	xy[2];
 	double	xyc[3];
@@ -27,11 +27,11 @@ void	display_mandelbrot_fractal(t_img *img)
 	xy[0] = -1;
 	while (++xy[0] < 1200)
 	{
-		xyc[0] = -2.5 + (xy[0] / 300);
+		xyc[0] = -2 + ((xy[0] * rx) / 1200);
 		xy[1] = -1;
 		while (++xy[1] < 1200)
 		{
-			xyc[1] = -2 + (xy[1] / 300);
+			xyc[1] = 2 - ((xy[1] * ry) / 1200);
 			zr = 0;
 			zi = 0;
 			iter  = -1;

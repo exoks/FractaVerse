@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/11 12:14:24 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:35:13 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	mlx_pixel_put_in_img(t_img *img, int x, int y, int color);
 void	mlx_create_window(t_var *var, char *title);
 void	mlx_create_image(t_var *var, t_img *img);
 void	display_options(void);
-void	display_mandelbrot_fractal(t_img *img);
+void	display_mandelbrot_fractal(t_img *img, double rx, double ry);
 void    display_julia_fractal(t_img *img, double xc, double yc);
 #endif
