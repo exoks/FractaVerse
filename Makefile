@@ -6,7 +6,7 @@
 #    By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/28 21:14:18 by oezzaou           #+#    #+#              #
-#    Updated: 2023/02/08 18:07:01 by oezzaou          ###   ########.fr        #
+#    Updated: 2023/02/11 11:45:13 by oezzaou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJDIR = obj
 SRCDIR = src
 INC = -I include/ -I ft_printf/include -I ft_printf/libft
 MLX_LIB = include/libmlx.a
-SRCS := fractol fractol_options mandelbrot_fractal julia_fractal fractol_utils
+SRCS := fractol fractol_menu_options mandelbrot_fractal julia_fractal fractol_utils
 OBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCS)))
 SRCS := $(addprefix $(SRCDIR)/, $(addsuffix .c, $(SRCS)))
 LIBFTPRINTF = ft_printf/libftprintf.a
@@ -59,8 +59,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 re: fclean all
 
-test: 
-	./$(NAME) 2 3
+mandel: 
+	./$(NAME) 1
+julia:
+	./$(NAME) 2 0 0
 
 clean:
 	@rm -rf $(OBJDIR)

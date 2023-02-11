@@ -11,7 +11,9 @@ typedef struct s_image
 
 void	put(t_image img, int x, int y, int color)
 {
-	int *pixel = img.addr + (y * img.line_len + x * (img.bpp / 8));
+	int	*pixel;
+
+	pixel = img.addr + (y * img.line_len + x * (img.bpp / 8));
 	*pixel = color;
 }
 int	main(void)

@@ -6,72 +6,39 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/09 15:47:00 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/11 12:12:56 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
+
+int	close_window(int keycode, t_var *var)
+{
+	if (keycode == 53)
+		exit(mlx_destroy_window(var->mlx, var->win) * 0);
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
 	t_var	var;
 	t_img	img;
 
-	var.mlx = mlx_init();
-	var.win = mlx_new_window(var.mlx, 1200, 1200, "FRACTAL");
-	img.img = mlx_new_image(var.mlx, 1200, 1200);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	if (ac == 1 || (ac == 2 && ft_atoi(av[1]) == 2))
+//	printf("=> %f\n", atoi_double(av[2]));
+//	printf("=> %f\n", atoi_double(av[3]));
+	if (ac == 1 || ac > 4)
 		return (display_options(), EXIT_SUCCESS);
-	if (ac == 2 && ft_atoi(av[1]) == 1)
-		display_mandelbrot_fractal(&var, &img);
-	/*else
-		display_julia_fractal(mlx, win, 0.355, 0.355);*/
+	mlx_create_window(&var, "FRACTAL");
+	mlx_create_image(&var, &img);
+	if (ac == 2 && atoi_double(av[1]) == MANDELBROT)
+		display_mandelbrot_fractal(&img);
+	if (ac == 4 && atoi_double(av[1]) == JULIASET)
+		display_julia_fractal(&img, atoi_double(av[2]), atoi_double(av[3]));
+	//	draw_line(&img);
 	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
+	mlx_key_hook(var.win, close_window, &var);
 	mlx_loop(var.mlx);
 	return (EXIT_SUCCESS);
 }
-/*int	main(void)
-{
-	void	*mlx;
-	void	*win;
-	double 	tmp;
-	double  Xc;
-	double 	Yc;
-	double x, y;
-	int	color = 0x0000FF00;
-	// INIT A WINDOW
-	 mlx = mlx_init();
-	// INIT A WINDOW
-	win = mlx_new_window(mlx, 1400, 1400, "Oussama");
-
-	y = 0;
-	while (y <= 1400)
-	{
-		Yc = 2 - (y / 350);
-		x = 0;
-		while (x <= 1400)
-		{
-			Xc = -2 + (x / 350);
-			double	Zr = 0;
-			double	Zi = 0;
-			int	i = -1;
-			while (++i < 1000)
-			{
-				tmp = Zr;
-				Zr = (Zr * Zr) - (Zi * Zi) + Xc;
-				Zi = (2 * tmp * Zi) + Yc;
-				if ((Zr * Zr) + (Zi * Zi) > 4)
-					break;
-			}
-			if (i == 1000)
-				mlx_pixel_put(mlx, win, x, y, color);
-			x += 1;
-		}
-		y += 1;
-	}
-	mlx_loop(mlx);
-	//	mlx_put_image_to_window(mlx, win, image, 100, 100);
-}*/
 
 // EACH POINT IS A COMPLEX NUMBER : I CHECK EVERY PIXEL USING Zn = Zn+1 ^ 2 + C : IF NOT DEVERGE UNDER ITERATION OF 0 THEN THIS POINT FROM MANDELBROT SET ?
 // HOW CAN I GET THE INFORMATION OF EACH PIXEL

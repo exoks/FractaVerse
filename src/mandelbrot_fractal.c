@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/09 15:46:28 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/11 13:00:07 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "fractol.h"
@@ -16,7 +16,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	display_mandelbrot_fractal(t_var *var, t_img *img)
+void	display_mandelbrot_fractal(t_img *img)
 {
 	double	xy[2];
 	double	xyc[3];
@@ -25,24 +25,24 @@ void	display_mandelbrot_fractal(t_var *var, t_img *img)
 	double	zi;
 
 	xy[0] = -1;
-	while (++xy[0] <= 1200)
+	while (++xy[0] < 1200)
 	{
-		xyc[0] = -2 + (xy[0] / 300);
+		xyc[0] = -2.5 + (xy[0] / 300);
 		xy[1] = -1;
-		while (++xy[1] <= 1200)
+		while (++xy[1] < 1200)
 		{
 			xyc[1] = -2 + (xy[1] / 300);
 			zr = 0;
 			zi = 0;
 			iter  = -1;
-			while (++iter < 255 && (zr * zr) + (zi * zi) < 4)
+			while (++iter < 256 && (zr * zr) + (zi * zi) < 4)
 			{
 				xyc[2] = zr;
 				zr = (zr * zr) - (zi * zi) + xyc[0];
 				zi = 2 * zi * xyc[2] + xyc[1];
 			}
-			if (iter != 255)
-				mlx_pixel_put_in_img(img, xy[0], xy[1], create_trgb(0, iter, 0, 255 - iter));
+			if (iter != 256)
+				mlx_pixel_put_in_img(img, xy[0], xy[1], create_trgb(iter, 256 - iter, iter, 256 - iter));
 		}
 	}
 }
