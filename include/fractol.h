@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/11 22:35:13 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:35:48 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_img
 	int		line_len;
 	int		bpp;
 	int		endian;
+	t_var	*var;
 }				t_img;
 
 void	draw_line(t_img *img);

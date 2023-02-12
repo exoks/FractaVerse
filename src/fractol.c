@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/11 22:45:55 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:48:05 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -20,8 +20,12 @@ int	close_window(int keycode, t_var *var)
 
 int	zoom(int keycode, int x, int y, t_img *img)
 {
-	//if (keycode == 4)
-		//display_mandelbrot_fractal(img, );
+	if (keycode == 4)
+	{
+		mlx_clear_window(img->var->mlx, img->var->win);
+		display_mandelbrot_fractal(img, 200, 200);
+		mlx_put_image_to_window(img->var->mlx, img->var->win, img->img, 0, 0);
+	}
 	return (0);
 }
 
@@ -37,13 +41,13 @@ int	main(int ac, char **av)
 	mlx_create_window(&var, "FRACTAL");
 	mlx_create_image(&var, &img);
 	if (ac == 2 && atoi_double(av[1]) == MANDELBROT)
-		display_mandelbrot_fractal(&img, 4, 4);
+		display_mandelbrot_fractal(&img, 100 , 100);
 	if (ac == 4 && atoi_double(av[1]) == JULIASET)
 		display_julia_fractal(&img, atoi_double(av[2]), atoi_double(av[3]));
 	//	draw_line(&img);
 	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
 	mlx_key_hook(var.win, close_window, &var);
-	mlx_mouse_hook(var.win, zoom, &var);
+//	mlx_mouse_hook(var.win, zoom, &var);
 	mlx_loop(var.mlx);
 	return (EXIT_SUCCESS);
 }
