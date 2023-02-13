@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/12 13:28:24 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/13 19:44:52 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "fractol.h"
@@ -27,11 +27,11 @@ void	display_mandelbrot_fractal(t_img *img, double rx, double ry)
 	xy[0] = -1;
 	while (++xy[0] < 1200)
 	{
-		xyc[0] = -(ry / 100) + ((xy[0] * rx / 100 * 2) / 1200);
+		xyc[0] =  /*-img->plan->y*/ -2 + rx + ((xy[0] * 2 * 1.5/*img->plan->x*/) / 1200);
 		xy[1] = -1;
 		while (++xy[1] < 1200)
 		{
-			xyc[1] = (ry / 100) - ((xy[1] * rx / 100 * 2) / 1200);
+			xyc[1] = /*img->plan->y*/ 2 - ry - ((xy[1] * 2 * 1.5/*img->plan->x*/) / 1200);
 			zr = 0;
 			zi = 0;
 			iter  = -1;
@@ -45,6 +45,7 @@ void	display_mandelbrot_fractal(t_img *img, double rx, double ry)
 				mlx_pixel_put_in_img(img, xy[0], xy[1], create_trgb(iter, 256 - iter, iter, 256 - iter));
 		}
 	}
+	mlx_put_image_to_window(img->var->mlx, img->var->win, img->img, 0, 0);
 }
 /****** FROM COMPLEX PLAN TO PIXEL GRIDE ******/
 /* 	x = (xc - 2) / step => ex step = 0.1      */

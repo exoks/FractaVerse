@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:22:41 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/12 13:37:43 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/13 16:57:52 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -40,8 +40,11 @@ void	mlx_create_window(t_var *var, char *title)
 	var->win = mlx_new_window(var->mlx, 1200, 1200, title);
 }
 
-void	mlx_create_image(t_var *var, t_img *img)
+void	mlx_create_image(t_var *var, t_img *img, t_c_plan *plan)
 {
+	plan->x = 2;
+	plan->y = 2;
+	img->plan = plan;
 	img->img = mlx_new_image(var->mlx, 1200, 1200);
 	img->var = var;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);

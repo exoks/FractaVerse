@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/12 13:35:48 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/13 15:21:16 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,15 @@ typedef struct s_var
 {
 	void	*mlx;
 	void	*win;
+	double	w;
+	double	h;
 }				t_var;
+
+typedef struct s_c_plan
+{
+	double	x;
+	double	y;
+}	t_c_plan;
 
 typedef struct s_img
 {
@@ -44,6 +52,7 @@ typedef struct s_img
 	int		bpp;
 	int		endian;
 	t_var	*var;
+	t_c_plan	*plan;
 }				t_img;
 
 void	draw_line(t_img *img);
@@ -51,7 +60,7 @@ int		create_trgb(int t, int r, int g, int b);
 double	atoi_double(char *s);
 void	mlx_pixel_put_in_img(t_img *img, int x, int y, int color);
 void	mlx_create_window(t_var *var, char *title);
-void	mlx_create_image(t_var *var, t_img *img);
+void	mlx_create_image(t_var *var, t_img *img, t_c_plan *plan);
 void	display_options(void);
 void	display_mandelbrot_fractal(t_img *img, double rx, double ry);
 void    display_julia_fractal(t_img *img, double xc, double yc);
