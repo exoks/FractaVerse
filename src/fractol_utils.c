@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:22:41 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:52 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/15 19:55:15 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -18,7 +18,7 @@ double	ft_power(double base, double power)
 	return (1);
 }
 
-double	atoi_double(char *s)
+double	str2double(char *s)
 {
 	double	p1;
 	double	p2;
@@ -40,10 +40,18 @@ void	mlx_create_window(t_var *var, char *title)
 	var->win = mlx_new_window(var->mlx, 1200, 1200, title);
 }
 
-void	mlx_create_image(t_var *var, t_img *img, t_c_plan *plan)
+void	mlx_create_image(t_var *var, t_img *img, t_julia_const *c, t_c_plan *plan)
 {
-	plan->x = 2;
+	img->c = c;
+	plan->x = 4;
 	plan->y = 2;
+	img->c = 0;
+	plan->m_x = 600;
+	plan->m_y = 600;
+	plan->dx = 0;
+	plan->dy = 0;
+	plan->old_x = 0;
+	plan->old_y = 0;
 	img->plan = plan;
 	img->img = mlx_new_image(var->mlx, 1200, 1200);
 	img->var = var;
@@ -57,14 +65,3 @@ void	mlx_pixel_put_in_img(t_img *img, int x, int y, int color)
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*pixel = color;
 }
-
-/*
-void	draw_line(t_img *img)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 400)
-		mlx_pixel_put_in_img(img, i, i, 0x00FF0000);
-}
-*/

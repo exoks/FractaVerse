@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/13 19:39:05 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/15 20:11:03 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -19,53 +19,61 @@ int	close_window(int keycode, t_var *var)
 }
 
 // MAKE ANY POINT YOU CHOSE AS THE REFERENCE POINT
-int	zoom(int keycode, int x, int y, t_img *img)
+int	zoom(int code, int x, int y, t_img *img)
 {
 	int	i;
+	double	new_x, new_y;
 
-	i = -1;
-	while (++i < 1200 * 1200)
-		*((int *) img->addr + i) = 0;
-//	mlx_clear_window(img->var->mlx, img->var->win);
-	if (keycode == 4)
+	mlx_clear_window(img->var->mlx, img->var->win);
+	if (!(x == img->plan->m_x && y == img->plan->m_y))
 	{
-//		printf("Xc => %f\n", -2.0 + ((double) x / 300.0));
-//		printf("Yc => %f\n", 2.0 - ((double) y / 300.0));
-//		if (img->plan->x == 2)
-//			img->plan->x = -2.0 + ((double) x / 300.0);
-//		if (img->plan->y == 2)
-//			img->plan->y = 2.0 - ((double) y / 300.0);
-		img->plan->x /= 1.2;
-		img->plan->y /= 1.2;
-		display_mandelbrot_fractal(img, -2.0 + ((double) x / 300.0), 2.0 - ((double) y / 300.0));
+			img->plan->old_x = -img->plan->y + (((double) x) * img->plan->x / 1200.0) + img->plan->dx;
+			img->plan->old_y = img->plan->y - (((double) y) * img->plan->x / 1200.0) + img->plan->dy;
 	}
-	if (keycode == 5)
+	img->plan->m_y = y;
+	img->plan->m_x = x;
+	if (code == SCROLL_DOWN || code == SCROLL_UP)
 	{
-		img->plan->x *= 1.2;
-		img->plan->y *= 1.2;
+		i = -1;
+		while (++i < 1200 * 1200)
+			*((int *) img->addr + i) = 0;
+		img->plan->x /= 1.3 * (code == 4) +  (1 / 1.4) * (code == 5);
+		img->plan->y /= 1.3 * (code == 4) + (1 / 1.4) * (code == 5);
+		new_x = -img->plan->y + (((double) x) * img->plan->x / 1200.0);
+		new_y = img->plan->y - (((double) y) * img->plan->x / 1200.0);
+		img->plan->dx = img->plan->old_x - new_x;
+		img->plan->dy = img->plan->old_y - new_y;
+		if (img->c) 
+			display_julia_fractal(img, img->c);
+		else
+			display_mandelbrot_fractal(img);
 	}
-	display_mandelbrot_fractal(img, 0, 0);
 	return (0);
 }
 
+int	display_fractal(t_img *img, int ac, char **av)
+{
+	if (ac == 2 && str2double(av[1]) == MANDELBROT)
+		return (display_mandelbrot_fractal(img), MANDELBROT);
+	if (ac == 4 && str2double(av[1]) == JULIASET)
+	{
+		img->c->cr = str2double(av[2]);
+		img->c->ci = str2double(av[3]);
+		return (display_julia_fractal(img, img->c), JULIASET);
+	}
+	return (display_options(), EXIT_SUCCESS);
+}
 int	main(int ac, char **av)
 {
-	t_var	var;
-	t_img	img;
-	t_c_plan	plan;
-//	printf("=> %f\n", atoi_double(av[2]));
-//	printf("=> %f\n", atoi_double(av[3]));
-
-	if (ac == 1 || ac > 4)
-		return (display_options(), EXIT_SUCCESS);
+	t_var			var;
+	t_img			img;
+	t_julia_const	c;
+	t_c_plan		plan;
+	
 	mlx_create_window(&var, "FRACTAL");
-	mlx_create_image(&var, &img, &plan);
-	if (ac == 2 && atoi_double(av[1]) == MANDELBROT)
-		display_mandelbrot_fractal(&img, 0, 0);
-	if (ac == 4 && atoi_double(av[1]) == JULIASET)
-		display_julia_fractal(&img, atoi_double(av[2]), atoi_double(av[3]));
-	//	draw_line(&img);
-//	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
+	mlx_create_image(&var, &img, &c, &plan);
+	if (!display_fractal(&img, ac, av))
+		return (EXIT_SUCCESS);
 	mlx_key_hook(var.win, close_window, &var);
 	mlx_mouse_hook(img.var->win, zoom, &img);
 	mlx_loop(var.mlx);
