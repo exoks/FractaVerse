@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/15 15:49:14 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/02/16 13:19:51 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "fractol.h"
@@ -18,31 +18,31 @@ int	create_trgb(int t, int r, int g, int b)
 
 void	display_mandelbrot_fractal(t_img *img)
 {
-	double	xy[2];
-	double	xyc[3];
-	int		iter;
-	double	zr;
-	double	zi;
+	t_pixel_grid	grid;
+	t_complex_plan	plan;
+	t_z				z;
 
-	xy[0] = -1;
-	while (++xy[0] < 1200)
+	grid.x = -1;
+	while (++(grid.x) < 1200)
 	{
-		xyc[0] =  -img->plan->y + ((xy[0] * img->plan->x) / 1200) + img->plan->dx;
-		xy[1] = -1;
-		while (++xy[1] < 1200)
+		plan.xc =  -img->plan->y + ((grid.x * img->plan->x) / 1200) + img->plan->dx;
+		grid.y = -1;
+		while (++(grid.y) < 1200)
 		{
-			xyc[1] = img->plan->y - ((xy[1] * img->plan->x) / 1200) + img->plan->dy;
-			zr = 0;
-			zi = 0;
-			iter  = -1;
-			while (++iter < 255 && (zr * zr) + (zi * zi) < 4)
+			plan.yc = img->plan->y - ((grid.y * img->plan->x) / 1200) + img->plan->dy;
+			z.r = 0;
+			z.i = 0;
+			z.n  = -1;
+			while (++z.n < 255 && (z.r * z.r) + (z.i * z.i) < 4)
 			{
-				xyc[2] = zr;
-				zr = (zr * zr) - (zi * zi) + xyc[0];
-				zi = 2 * zi * xyc[2] + xyc[1];
+				z.tmp = z.r;
+				z.r = (z.r * z.r) - (z.i * z.i) + plan.xc;
+				z.i = 2 * z.i * z.tmp + plan.yc;
 			}
-			if (iter != 255)
-				mlx_pixel_put_in_img(img, xy[0], xy[1], create_trgb(iter, 256 - iter, iter, 256 - iter));
+			if (z.n != 255)
+				mlx_pixel_put_in_img(img, grid.x, grid.y, create_trgb(0, 256 - z.n, z.n, 256 - z.n));
+			else
+				mlx_pixel_put_in_img(img, grid.x, grid.y, create_trgb(0, 0, 0, 0));
 		}
 	}
 	mlx_put_image_to_window(img->var->mlx, img->var->win, img->img, 0, 0);
