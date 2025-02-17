@@ -9,18 +9,24 @@
 /*   Updated: 2022/10/02 19:11:20 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//====<[ include guards: ]>=====================================================
 #ifndef LIBFT_H
 # define LIBFT_H
+
+//====<[ headers: ]>============================================================
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 
+//====<[ struct: list ]>========================================================
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
+//====<[ prototypes: ]>=========================================================
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -67,3 +73,4 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif
+//==============================================================================
