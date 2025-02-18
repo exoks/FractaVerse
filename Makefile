@@ -16,18 +16,39 @@ CFLAGS			:= -Wall -Wextra -Werror
 MLX_FLAGS 	:= -lmlx -framework OpenGL -framework AppKit
 
 #====<[ Colors: ]>==============================================================
-GREEN				:= \033[1;32m
-RED					:= \033[1;31m
-CYAN				:= \033[1;36m
-NOCLR				:= \033[1;0m
+GREEN					= \033[1;32m
+RED						= \033[1;31m
+BLUE					= \033[34m
+CYAN					= \033[1;36m
+GRAY					= \033[0;90m
+PURPLE				= \033[0;35m
+YELLOW				= \033[0;93m
+BLACK  				= \033[20m
+MAGENTA 			= \033[35m
+WHITE  				= \033[37m
+PINK					= \033[0;38;5;199m
+ORANGE 				= \033[38;5;214m
+LIGHT_BLACK  	= \033[90m
+LIGHT_RED    	= \033[91m
+LIGHT_GREEN  	= \033[92m
+LIGHT_YELLOW 	= \033[93m
+LIGHT_BLUE   	= \033[94m
+LIGHT_MAGENTA = \033[95m
+LIGHT_CYAN   	= \033[96m
+LIGHT_WHITE  	= \033[97m
+LIGHT_BLUE		= \033[38;5;45m
+RESET					= \033[1;0m
 
 #====<[ Sources: ]>=============================================================
+PROJECT			:= fract-ol
 NAME				:= fractol
 NAME_BNS		:= fractol_bonus
+FT_PRINTF		:= ft_printf
 OBJ_DIR			:= obj
 SRC_DIR			:= src
 BNS_DIR			:= bonus
-INCLUDE 		:= -Iinclude/ -Ift_printf/include -Ift_printf/libft
+RM					:= rm -rf
+INCLUDE 		:= -Iinclude/ -I$(FT_PRINTF)/include -I$(FT_PRINTF)/libft
 
 #====<[ Mondatory: ]>===========================================================
 SRC 				:= fractol fractol_menu fractol_window fractals fractol_events \
@@ -36,7 +57,7 @@ SRC 				:= fractol fractol_menu fractol_window fractals fractol_events \
 OBJ 				:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC)))
 SRC 				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 
-#====<[ Bonus Sources: ]>=======================================================
+#====<[ Bonus: ]>===============================================================
 SRC_BNS				:= burning_ship_fractal fractals_bonus fractol_events_bonus \
 							 fractol_menu_bonus
 
@@ -47,49 +68,59 @@ UTILS				:= fractol fractol_window fractol_utils
 OBJ_UTILS		:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(UTILS)))
 UTILS				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS)))
 
-LIBFTPRINTF := ft_printf/libftprintf.a
+LIBFTPRINTF := $(FT_PRINTF)/libftprintf.a
 
 #====<[ Rules: ]>==============================================================
 all: $(OBJ_DIR) $(NAME)
 
-$(NAME): $(OBJ) $(LIBFTPRINTF) 
+$(NAME): $(LIBFTPRINTF) $(OBJ) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
-	@printf "\n%10s===========%10s\n <<<<<<<<<< $(GREEN)$(NAME)$(NOCLR) >>>>>>>>>>\n" " " " "
-	@printf "%10s===========%10s\n" " " " "
+	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${RESET}"
 
 bonus: $(OBJ_DIR) $(NAME_BNS) 
 
-$(NAME_BNS): $(OBJ_BNS) $(OBJ_UTILS) $(LIBFTPRINTF)
+$(NAME_BNS): $(LIBFTPRINTF) $(OBJ_BNS) $(OBJ_UTILS) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
-	@printf "\n%10s===========%10s\n <<<<<<< $(GREEN)$(NAME_BNS)$(NOCLR) >>>>>>>\n" " " " "
-	@printf "%10s===========%10s\n" " " " "
+	@echo "${GREEN}[OK]: ${CYAN}$(NAME_BNS) ✔️${RESET}"
 
 $(LIBFTPRINTF):
-	@make -C ft_printf
+	@make -C $(FT_PRINTF)
 
 $(OBJ_DIR):
-	@echo "Creating >>>>>>>>>>> OBJ_DIR ..."
 	@mkdir -p $@
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@echo "Creating >>>>>>>>>>> $@ ..."
+	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(BNS_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@echo "Creating >>>>>>>>>>> $@ ..."
+	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 re: fclean all
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@make -C ft_printf/ clean
-	@echo "Cleaning OBJECTS >>>>>>>> ... -=> Done"
+	@make -C $(FT_PRINTF) fclean
+	@if [ -d $(OBJ_DIR) ]; then\
+		${RM} $(OBJ_DIR);\
+		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+					 "... " "$(PROJECT)/$(OBJ_DIR) ✔️";\
+	else\
+		printf "${RED}[KO]${RESET}: ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
+					 "..." "$(PROJECT)/$(OBJ_DIR) ✖️";\
+	fi
 
 fclean: clean
-	@make -C ft_printf/ fclean
-	@rm -rf $(NAME) $(NAME_BNS)
-	@echo "Cleaning $(NAME) >>>>>>>> ... -=> Done"
+	@if [ -f $(NAME) ]; then\
+		${RM} $(NAME);\
+		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+					 "... " "$(PROJECT)/$(NAME) ✔️";\
+	fi
+	@if [ -f $(NAME_BNS) ]; then\
+		${RM} $(NAME_BNS);\
+		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+					 "... " "$(PROJECT)/$(NAME_BNS) ✔️";\
+	fi
 
 .PHONY: all clean fclean re
 #==============================================================================
