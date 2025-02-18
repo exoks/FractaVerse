@@ -11,9 +11,11 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-static void	ft_ini_data(t_data *data);
+//====<[ Prototypes: forward declaration ]>=====================================
+static void	ft_init_data(t_data *data);
 static int	ft_print_conver(va_list *obj, t_data *data);
 
+//====<[ ft_printf: ]>==========================================================
 int	ft_printf(const char *s, ...)
 {
 	va_list	obj;
@@ -23,7 +25,7 @@ int	ft_printf(const char *s, ...)
 
 	len = 0;
 	va_start(obj, s);
-	ft_ini_data(&data);
+	ft_init_data(&data);
 	while (*s)
 	{
 		if (*s == '%')
@@ -35,14 +37,15 @@ int	ft_printf(const char *s, ...)
 		}
 		else
 			len += ft_print_char(*s, NULL);
-		ft_ini_data(&data);
+		ft_init_data(&data);
 		s++;
 	}
 	va_end(obj);
 	return (len);
 }
 
-static void	ft_ini_data(t_data *data)
+//====<[ ft_init_data: ]>=======================================================
+static void	ft_init_data(t_data *data)
 {
 	data->flag = 0;
 	data->width = 0;
@@ -50,6 +53,7 @@ static void	ft_ini_data(t_data *data)
 	data->type = 0;
 }
 
+//====<[ ft_print_conver: ]>====================================================
 static int	ft_print_conver(va_list *obj, t_data *data)
 {
 	int	l;

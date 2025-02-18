@@ -6,49 +6,70 @@
 #    By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 15:55:24 by oezzaou           #+#    #+#              #
-#    Updated: 2023/02/22 23:06:43 by oezzaou          ###   ########.fr        #
+#    Updated: 2022/10/12 19:04:11 by oezzaou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME := libftprintf.a
-SRCDIR := src
-OBJDIR := obj
-INC = -I libft -I include/
-CC := cc
-CFLAGS := -Wall -Wextra -Werror
-SRC := ft_manage_flags ft_putnbr_base_upx ft_print_char ft_print_str ft_putnbr_base_id ft_printf_utils ft_printf
-OBJ := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRC)))
-SRC := $(addprefix $(SRCDIR)/, $(addsuffix .c, $(SRC)))
-LIBFT = libft/
 
-GREEN := \033[1;32m
-RED := \033[1;31m
-CYAN := \033[1;36m
-NOCLR := \033[1;0m
+#====<[ Colors: ]>==============================================================
+GREEN			:= \033[1;32m
+RED				:= \033[1;31m
+CYAN			:= \033[1;36m
+NOCLR			:= \033[1;0m
 
-all: $(OBJDIR) $(NAME)
+#====<[ CC compiler: ]>=========================================================
+CC				:= cc
+CFLAGS		:= -Wall -Wextra -Werror
+RM				:= rm -rf
 
-$(NAME): $(OBJ)
-	@make -C $(LIBFT)
-	@ar -crs $@ $(LIBFT)*.o $(OBJ)
-	@echo "Creating >>>>>>>>>> $(RED)LIBFTPRINTF$(NOCLR) ... $(GREEN)Done $(NOCLR)"
+#===<[ Sources: ]>==============================================================
+NAME			:= libftprintf.a
+SRC_DIR		:= src
+OBJ_DIR		:= obj
+LIBFT_DIR := libft
+INCLUDE		:= -I$(LIBFT_DIR) -Iinclude
 
-bonus: clean $(OBJDIR) $(NAME)
+SRC				:= ft_manage_flags.c ft_print_char.c ft_putnbr_base_id.c \
+						 ft_print_str.c ft_putnbr_base_upx.c ft_printf_utils.c
 
-$(OBJDIR)/%.o:$(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+OBJ				:= $(addprefix $(OBJ_DIR)/, ${SRC:.c=.o})
+SRC				:= $(addprefix $(SRC_DIR)/, $(SRC))
 
-$(OBJDIR):
+#====<[ Rules: ]>===============================================================
+all: $(NAME)
+
+$(NAME): $(OBJ) $(OBJ_DIR)/ft_printf.o
+	@make -C $(LIBFT_DIR)	
+	@ar -rcs $@  $(OBJ_DIR)/* $(LIBFT_DIR)/obj/*
+	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${NOCLR}"
+
+bonus: clean $(NAME)
+
+test:
+	gcc main.c libftprintf.a -Iinclude -Ilibft && ./a.out
+
+$(OBJ_DIR)/ft_printf.o: ft_printf.c
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@printf "$(GREEN)[OK]${NOCLR}: Compiling %-30s | $@\n" "$<"
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@printf "$(GREEN)[OK]${NOCLR}: Compiling %-30s | $@\n" "$<"
+
+bonus: clean $(NAME)
+
+$(OBJ_DIR):
 	@mkdir -p $@
 
 clean:
-	@$(MAKE) -C $(LIBFT) clean
-	@rm -rf $(OBJDIR) 
+	@${RM} $(OBJ_DIR) 
+	@make -C $(LIBFT_DIR) clean
 
-fclean: clean
-	@$(MAKE) -C $(LIBFT) fclean
-	@rm -rf $(OBJDIR) $(NAME)
-	@echo "Cleaning LIBFTPRINTF >>>>>>> ... -=> Done"
+fclean:
+	@${RM} -rf $(NAME) $(OBJ_DIR) 
+	@make -C $(LIBFT_DIR) fclean
+	@echo "${GREEN}[OK]${NOCLR}: Cleaning ... $(NAME) ✔️"
 
 re: fclean all
 	
-.PHONY: test all clean fclean re bonus $(LIBFT)
+.PHONY: all bonus test clean fclean re 
+#===============================================================================

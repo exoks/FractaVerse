@@ -11,81 +11,84 @@
 # **************************************************************************** #
 
 #====<[ MLX & Compiler: ]>======================================================
-CC				= gcc
-CFLAGS		= -Wall -Wextra -Werror
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+CC					:= cc
+CFLAGS			:= -Wall -Wextra -Werror
+MLX_FLAGS 	:= -lmlx -framework OpenGL -framework AppKit
 
 #====<[ Colors: ]>==============================================================
-GREEN			:= \033[1;32m
-RED				:= \033[1;31m
-CYAN			:= \033[1;36m
-NOCLR			:= \033[1;0m
+GREEN				:= \033[1;32m
+RED					:= \033[1;31m
+CYAN				:= \033[1;36m
+NOCLR				:= \033[1;0m
 
 #====<[ Sources: ]>=============================================================
 NAME				:= fractol
-NAME_BONUS	:= fractol_bonus
-OBJDIR			:= obj
-SRCDIR			:= src
-BDIR				:= bonus
-INC 				= -I include/ -I ft_printf/include -I ft_printf/libft
+NAME_BNS		:= fractol_bonus
+OBJ_DIR			:= obj
+SRC_DIR			:= src
+BNS_DIR			:= bonus
+INCLUDE 		:= -Iinclude/ -Ift_printf/include -Ift_printf/libft
 
 #====<[ Mondatory: ]>===========================================================
-SRCS := fractol fractol_menu fractol_window fractals fractol_events fractol_utils
-OBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCS)))
-SRCS := $(addprefix $(SRCDIR)/, $(addsuffix .c, $(SRCS)))
+SRC 				:= fractol fractol_menu fractol_window fractals fractol_events \
+							 fractol_utils
+
+OBJ 				:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC)))
+SRC 				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 
 #====<[ Bonus Sources: ]>=======================================================
-SRCB := burning_ship_fractal fractals_bonus fractol_events_bonus \
-				fractol_menu_bonus
-OBJB := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCB)))
-SRCB := $(addprefix $(SRCDIR)/$(BDIR)/, $(addsuffix .c, $(SRCB)))
+SRC_BNS				:= burning_ship_fractal fractals_bonus fractol_events_bonus \
+							 fractol_menu_bonus
 
-PREQ := fractol fractol_window fractol_utils
-OPREQ := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(PREQ)))
-PREQ := $(addprefix $(SRCDIR)/, $(addsuffix .c, $(PREQ)))
+OBJ_BNS			:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_BNS)))
+SRC_BNS			:= $(addprefix $(SRC_DIR)/$(BNS_DIR)/, $(addsuffix .c, $(SRC_BNS)))
 
-LIBFTPRINTF = ft_printf/libftprintf.a
+UTILS				:= fractol fractol_window fractol_utils
+OBJ_UTILS		:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(UTILS)))
+UTILS				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS)))
+
+LIBFTPRINTF := ft_printf/libftprintf.a
 
 #====<[ Rules: ]>==============================================================
-all: $(OBJDIR) $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFTPRINTF) 
-	@$(CC) $(CFLAGS) $(INC) $^ -o $@ $(MLX_FLAGS)
+$(NAME): $(OBJ) $(LIBFTPRINTF) 
+	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
 	@printf "\n%10s===========%10s\n <<<<<<<<<< $(GREEN)$(NAME)$(NOCLR) >>>>>>>>>>\n" " " " "
 	@printf "%10s===========%10s\n" " " " "
 
-bonus: $(OBJDIR) $(NAME_BONUS) 
+bonus: $(OBJ_DIR) $(NAME_BNS) 
 
-$(NAME_BONUS): $(OBJB) $(OPREQ) $(LIBFTPRINTF)
-	@$(CC) $(CFLAGS) $(INC) $^ -o $@ $(MLX_FLAGS)
-	@printf "\n%10s===========%10s\n <<<<<<< $(GREEN)$(NAME_BONUS)$(NOCLR) >>>>>>>\n" " " " "
+$(NAME_BNS): $(OBJ_BNS) $(OBJ_UTILS) $(LIBFTPRINTF)
+	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
+	@printf "\n%10s===========%10s\n <<<<<<< $(GREEN)$(NAME_BNS)$(NOCLR) >>>>>>>\n" " " " "
 	@printf "%10s===========%10s\n" " " " "
 
 $(LIBFTPRINTF):
 	@make -C ft_printf
 
-$(OBJDIR):
-	@echo "Creating >>>>>>>>>>> OBJDIR ..."
+$(OBJ_DIR):
+	@echo "Creating >>>>>>>>>>> OBJ_DIR ..."
 	@mkdir -p $@
 	
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "Creating >>>>>>>>>>> $@ ..."
 
-$(OBJDIR)/%.o: $(SRCDIR)/$(BDIR)/%.c
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/$(BNS_DIR)/%.c
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "Creating >>>>>>>>>>> $@ ..."
 
 re: fclean all
 
 clean:
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ_DIR)
 	@make -C ft_printf/ clean
 	@echo "Cleaning OBJECTS >>>>>>>> ... -=> Done"
 
 fclean: clean
 	@make -C ft_printf/ fclean
-	@rm -rf $(NAME) $(NAME_BONUS)
+	@rm -rf $(NAME) $(NAME_BNS)
 	@echo "Cleaning $(NAME) >>>>>>>> ... -=> Done"
 
 .PHONY: all clean fclean re
