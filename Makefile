@@ -71,13 +71,17 @@ UTILS				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS)))
 LIBFTPRINTF := $(FT_PRINTF)/libftprintf.a
 
 #====<[ Rules: ]>==============================================================
-all: $(OBJ_DIR) $(NAME)
+all: signature $(OBJ_DIR) $(NAME)
 
 $(NAME): $(LIBFTPRINTF) $(OBJ) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
 	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${RESET}"
 
 bonus: $(OBJ_DIR) $(NAME_BNS) 
+
+signature:
+	@printf "${GRAY}%19s${RESET}\n" "𓆩♕𓆪"
+	@printf "${GRAY}%s${RESET}\n"		"𓄂 oussama ezzaou𓆃  "
 
 $(NAME_BNS): $(LIBFTPRINTF) $(OBJ_BNS) $(OBJ_UTILS) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
@@ -122,5 +126,5 @@ fclean: clean
 					 "... " "$(PROJECT)/$(NAME_BNS) ✔️";\
 	fi
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re signature 
 #==============================================================================
