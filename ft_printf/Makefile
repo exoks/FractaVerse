@@ -58,7 +58,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_DIR)/ft_printf.o
 	@ar -rcs $@  $(OBJ_DIR)/* $(LIBFT)/obj/*
-	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${RESET}"
+	@echo "${GREEN}[OK] ${CYAN}$(NAME) ✔️${RESET}"
 
 bonus: clean $(NAME)
 
@@ -67,11 +67,11 @@ test:
 
 $(OBJ_DIR)/ft_printf.o: ft_printf.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
+	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .create_dirs $(LIBFT) 
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
+	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 $(LIBFT):
 	@make -C $@
@@ -83,20 +83,20 @@ clean:
 	@make -C $(LIBFT) fclean
 	@if [ -d $(OBJ_DIR) ]; then\
 		${RM} $(OBJ_DIR);\
-		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(OBJ_DIR) ✔️";\
 	else\
-		printf "${RED}[KO]${RESET}: ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
+		printf "${RED}[KO]${RESET} ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
 					 "..." "$(PROJECT)/$(OBJ_DIR) ✖️";\
 	fi
 
 fclean: clean
 	@if [ -f $(NAME) ]; then\
 		${RM} $(NAME);\
-		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(NAME) ✔️";\
 	else\
-		printf "${RED}[KO]${RESET}: ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
+		printf "${RED}[KO]${RESET} ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
 					 "..." "$(PROJECT)/$(NAME) ✖️";\
 	fi
 
@@ -104,5 +104,5 @@ re: fclean all
 	
 .create_dirs: $(OBJ_DIR)
 
-.PHONY: all bonus test clean fclean re $(LIBFT)
+.PHONY: all bonus clean fclean re $(LIBFT)
 #===============================================================================
