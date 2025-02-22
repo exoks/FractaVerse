@@ -75,7 +75,7 @@ all: signature $(OBJ_DIR) $(NAME)
 
 $(NAME): $(LIBFTPRINTF) $(OBJ) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
-	@echo "${GREEN}[OK]: ${CYAN}$(NAME) ✔️${RESET}"
+	@echo "${GREEN}[OK] ${CYAN}$(NAME) ✔️${RESET}"
 
 bonus: $(OBJ_DIR) $(NAME_BNS) 
 
@@ -85,7 +85,7 @@ signature:
 
 $(NAME_BNS): $(LIBFTPRINTF) $(OBJ_BNS) $(OBJ_UTILS) 
 	@$(CC) $(CFLAGS) $(INCLUDE) $^ -o $@ $(MLX_FLAGS)
-	@echo "${GREEN}[OK]: ${CYAN}$(NAME_BNS) ✔️${RESET}"
+	@echo "${GREEN}[OK] ${CYAN}$(NAME_BNS) ✔️${RESET}"
 
 $(LIBFTPRINTF):
 	@make -C $(FT_PRINTF)
@@ -95,11 +95,11 @@ $(OBJ_DIR):
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
+	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(BNS_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@printf "$(GREEN)[OK]${RESET}: ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
+	@printf "$(GREEN)[OK]${RESET} ${PINK}Compiling${RESET} %-33s| $@\n" "$<"
 
 re: fclean all
 
@@ -107,22 +107,22 @@ clean:
 	@make -C $(FT_PRINTF) fclean
 	@if [ -d $(OBJ_DIR) ]; then\
 		${RM} $(OBJ_DIR);\
-		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(OBJ_DIR) ✔️";\
 	else\
-		printf "${RED}[KO]${RESET}: ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
+		printf "${RED}[KO]${RESET} ${BLUE}Not Found %-33s${RESET}| ./%s\n"\
 					 "..." "$(PROJECT)/$(OBJ_DIR) ✖️";\
 	fi
 
 fclean: clean
 	@if [ -f $(NAME) ]; then\
 		${RM} $(NAME);\
-		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(NAME) ✔️";\
 	fi
 	@if [ -f $(NAME_BNS) ]; then\
 		${RM} $(NAME_BNS);\
-		printf "${GREEN}[OK]${RESET}: ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
+		printf "${GREEN}[OK]${RESET} ${ORANGE}Cleaning  %-33s${RESET}| ./%s\n"\
 					 "... " "$(PROJECT)/$(NAME_BNS) ✔️";\
 	fi
 
