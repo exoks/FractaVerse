@@ -48,7 +48,7 @@ OBJ_DIR			:= obj
 SRC_DIR			:= src
 BNS_DIR			:= bonus
 RM					:= rm -rf
-INCLUDE 		:= -Iinclude/ -I$(FT_PRINTF)/include -I$(FT_PRINTF)/libft
+INCLUDE 		:= -Iinclude/ -I$(FT_PRINTF)/include -I$(FT_PRINTF)/libft/include
 
 #====<[ Mondatory: ]>===========================================================
 SRC 				:= fractol fractol_menu fractol_window fractals fractol_events \
