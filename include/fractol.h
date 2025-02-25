@@ -6,64 +6,56 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:59:22 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 23:00:17 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 09:00:54 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//====<[ Include guards: ]>=====================================================
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
+//====<[ Headers: ]>============================================================
 # include "mlx.h"
 # include "ft_printf.h"
 # include <math.h>
+
+//====<[ Macros: ]>=============================================================
 # define ABS(A) A * ((A >= 0) - (A < 0))
 # define RGB(R, G, B) (int) R << 16 | (int) G << 8 | (int) B
 # define WHITE 0xFFFFFF
 
-//#############################
-//#           Usage           #
-//#############################
 # define ITERATIONS "Iterations : "
-# define USAGE "Usage :"
-# define U_ARROWS "Arows       : moving fractal"
-# define U_M_WHEEL "Mouse wheel : zoom in & out"
-# define U_R "R           : reset"
-# define U_ESC "ESC         : exit"
+# define USAGE			"Usage :"
+# define U_ARROWS		"Arows       : moving fractal"
+# define U_M_WHEEL	"Mouse wheel : zoom in & out"
+# define U_R				"R           : reset"
+# define U_ESC			"ESC         : exit"
 
-//############################
-//#         FRACTALS         #
-//############################
+//====<[ fractals: ]>=============================
 # define MANDELBROT 1
 # define JULIASET 2
 # define BURNING_SHIP 3
 
-//############################
-//#        MOUSE HOOK        #
-//############################
+//====<[ mouse hook: ]>===========================
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
 
-//############################
-//#        FRACTLAS          #
-//############################
-# define TITLE "=> Mandelbrot fractal example :\n"
-# define DEV "<<| Made By OEZZAOU |>>"
+//====<[ fractals: ]>=============================
+# define TITLE	"=> Mandelbrot fractal example :\n"
+# define DEV		"<<| Made By OEZZAOU |>>"
 # define SYNTAX "Usage : SYNTAX => ./fractol [ARG1] [ARG2] [ARG3]"
-# define MAN "./fractol 1               => Mandelbrot fractal"
-# define JUL "./fractol 2 [ARG1] [ARG2] => JULIA fractal"
-# define ARG1 "-> -2 <= ARG1 <= 2"
-# define ARG2 "-> -2 <= ARG2 <= 2"
+# define MAN		"./fractol 1               => Mandelbrot fractal"
+# define JUL		"./fractol 2 [ARG1] [ARG2] => JULIA fractal"
+# define ARG1		"-> -2 <= ARG1 <= 2"
+# define ARG2		"-> -2 <= ARG2 <= 2"
 
-//############################
-//#         ARROWS           #
-//############################
+//====<[ arrows: ]>===============================
 # define LEFT 124
 # define RIGHT 123
 # define UP 126
 # define DOWN 125
 
-//###########################
-//#           KEYS          #
-//###########################
+//====<[ keys: ]>=================================
 # define RESET	15
 # define ESC 53
 # define PLUS 69
@@ -73,18 +65,14 @@
 # define F 3
 # define D 2
 
-//#############################
-//#           WIN             #
-//#############################
+//====<[ Struct : win: ]>=======================================================
 typedef struct s_var
 {
 	void		*mlx;
 	void		*win;
 }				t_var;
 
-//############################
-//#       COMPLEX PLAN       #
-//############################
+//====<[ complex_plan: ]>=========================
 typedef struct s_complex_plan
 {
 	double		xc;
@@ -97,18 +85,14 @@ typedef struct s_complex_plan
 	double		dy;
 }				t_complex_plan;
 
-//###########################
-//#        PIXEL grid       #
-//###########################
+//====<[ pixel_grid: ]>===========================
 typedef struct s_pixel_grid
 {
 	double		x;
 	double		y;
 }				t_pixel_grid;
 
-//###########################
-//#       Z = Z^2 + C       #
-//###########################
+//====<[ Equations: Z = Z^2 + C ]>================
 typedef struct s_equation
 {
 	double		r;
@@ -117,18 +101,14 @@ typedef struct s_equation
 	int			n;
 }				t_equation;
 
-//############################
-//#          JULIA           #
-//############################
+//====<[ JULIA: ]>================================
 typedef struct s_julia
 {
 	double		cr;
 	double		ci;
 }				t_julia;
 
-//#############################
-//#            RGB            #
-//#############################
+//====<[ RGB: ]>==================================
 typedef struct s_rgb
 {
 	float		r;
@@ -137,9 +117,7 @@ typedef struct s_rgb
 	int			s;
 }				t_rgb;
 
-//############################
-//#         IMAGE            #
-//############################
+//====<[ IMAGE: ]>================================
 typedef struct s_img
 {
 	void			*addr;
@@ -157,6 +135,7 @@ typedef struct s_img
 	t_julia			*julia;
 }					t_img;
 
+//====<[ functions: prototypes ]>===============================================
 	/********** EVENTS ************/
 void	events_handler(t_img *img);
 int		close_window(t_img *img);
@@ -183,4 +162,5 @@ double	slope(t_img *img);
 int		create_color(int iter);
 double	str2double(char *s);
 
-#endif
+#endif /*__FRACTOL_H__*/
+//==============================================================================

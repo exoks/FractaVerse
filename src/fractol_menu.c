@@ -6,11 +6,12 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:27 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 22:09:54 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 07:52:38 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
+//====<[ display_options: ]>====================================================
 void	display_options(void)
 {
 	ft_printf("\n\n%s\n", TITLE);
@@ -34,6 +35,7 @@ void	display_options(void)
 	ft_printf("%37s\n%37s\n\n\n", ARG1, ARG2);
 }
 
+//====<[ display_usage_menu: ]>=================================================
 void	display_usage_menu(t_img *img)
 {
 	char	*tmp;

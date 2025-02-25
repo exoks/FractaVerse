@@ -6,11 +6,12 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 21:31:24 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 07:58:35 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol_bonus.h"
 
+//====<[ display_burning_ship_fractal: ]>=======================================
 void	display_burning_ship_fractal(t_img *img)
 {
 	t_pixel_grid	grid;

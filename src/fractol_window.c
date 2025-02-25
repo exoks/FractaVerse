@@ -6,11 +6,12 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 19:58:10 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 21:55:06 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 07:56:04 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
+//====<[ mlx_create_window: ]>==================================================
 void	mlx_create_window(t_var *var)
 {
 	var->mlx = mlx_init();
@@ -19,6 +20,7 @@ void	mlx_create_window(t_var *var)
 	var->win = mlx_new_window(var->mlx, 1200, 1200, "FRACTAL");
 }
 
+//====<[ mlx_create_image: ]>===================================================
 void	mlx_create_image(t_var *var, t_img *img, t_julia *c, t_complex_plan *p)
 {
 	img->rgb->s = 0;
@@ -38,6 +40,7 @@ void	mlx_create_image(t_var *var, t_img *img, t_julia *c, t_complex_plan *p)
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->l_len, &img->edn);
 }
 
+//====<[ mlx_pixel_put_in_img: ]>===============================================
 void	mlx_pixel_put_in_img(t_img *img, int x, int y, int color)
 {
 	int	*pixel;
@@ -46,6 +49,7 @@ void	mlx_pixel_put_in_img(t_img *img, int x, int y, int color)
 	*pixel = color;
 }
 
+//====<[ set_rgb: ]>============================================================
 void	set_rgb(t_rgb *rgb, float r, float g, float b)
 {
 	rgb->r = r;
@@ -53,6 +57,7 @@ void	set_rgb(t_rgb *rgb, float r, float g, float b)
 	rgb->b = b;
 }
 
+//====<[ hsv_to_rgb: ]>=========================================================
 int	hsv_to_rgb(int hue, float saturation, float value, t_img *img)
 {
 	float	c;

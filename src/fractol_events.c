@@ -6,11 +6,12 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:04:34 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 19:21:36 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 07:51:13 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
+//====<[ events_handler: ]>=====================================================
 void	events_handler(t_img *img)
 {
 	mlx_key_hook(img->var->win, on_press_button, img);
@@ -18,11 +19,13 @@ void	events_handler(t_img *img)
 	mlx_hook(img->var->win, 17, 0, close_window, img);
 }
 
+//====<[ close_window: ]>=======================================================
 int	close_window(t_img *img)
 {
 	exit(mlx_destroy_window(img->var->mlx, img->var->win) * 0);
 }
 
+//====<[ zoom: ]>===============================================================
 int	zoom(int code, int x, int y, t_img *img)
 {
 	double	new_xc;
@@ -43,6 +46,7 @@ int	zoom(int code, int x, int y, t_img *img)
 	return (0);
 }
 
+//====<[ on_press_button: ]>====================================================
 int	on_press_button(int code, t_img *img)
 {
 	if ((code == J || code == K || code == F || code == D)

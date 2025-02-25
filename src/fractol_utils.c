@@ -6,16 +6,18 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:22:41 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 23:40:57 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 07:54:00 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
+//====<[ slop: ]>===============================================================
 double	slope(t_img *img)
 {
 	return (img->p->a / img->h);
 }
 
+//====<[ modul_z: ]>============================================================
 double	modul_z(double *zr, double *zi, t_img *img)
 {
 	double	tmp;
@@ -39,6 +41,7 @@ double	modul_z(double *zr, double *zi, t_img *img)
 	return (((*zr) * (*zr)) + ((*zi) * (*zi)));
 }
 
+//====<[ str2double: ]>=========================================================
 double	str2double(char *s)
 {
 	double	p1;

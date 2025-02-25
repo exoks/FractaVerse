@@ -6,11 +6,12 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:41:35 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/22 21:41:00 by oezzaou          ###   ########.fr       */
+/*   Updated: 2025/02/25 08:07:02 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol_bonus.h"
 
+//====<[ shift_color: ]>========================================================
 int	shift_color(t_img *img)
 {
 	img->rgb->s += 6;
@@ -18,6 +19,7 @@ int	shift_color(t_img *img)
 	return (0);
 }
 
+//====<[ display_fractal: ]>====================================================
 int	display_fractal(t_img *img, int ac, char **av)
 {
 	if ((ac == 2 && str2double(av[1]) == MANDELBROT)
@@ -44,6 +46,7 @@ int	display_fractal(t_img *img, int ac, char **av)
 	return (0);
 }
 
+//====<[ display_mandelbrot_fractal: ]>=========================================
 void	display_mandelbrot_fractal(t_img *img)
 {
 	t_pixel_grid	grid;
@@ -73,6 +76,7 @@ void	display_mandelbrot_fractal(t_img *img)
 	mlx_put_image_to_window(img->var->mlx, img->var->win, img->img, 0, 0);
 }
 
+//====<[ display_julia_fractal: ]>==============================================
 void	display_julia_fractal(t_img *img)
 {
 	t_pixel_grid	grid;
