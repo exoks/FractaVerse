@@ -64,7 +64,6 @@ bonus: clean $(NAME)
 
 # Rule usage:
 # |=> [ make test CFILE=<file_to_compile_with_libftprintf.a> ]
-
 test:
 	@$(CC) $(CFLAGS) $(INCLUDE) $(CFILE) $(NAME) -o foo && ./foo
 

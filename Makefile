@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 #====<[ MLX & Compiler: ]>======================================================
-CC					:= cc
-CFLAGS			:= -Wall -Wextra -Werror
-MLX_FLAGS 	:= -lmlx -framework OpenGL -framework AppKit
+CC					  := cc
+CFLAGS			  := -Wall -Wextra -Werror
+MLX_FLAGS 	  := -lmlx -framework OpenGL -framework AppKit
 
 #====<[ Colors: ]>==============================================================
 GREEN					= \033[1;32m
@@ -40,26 +40,26 @@ LIGHT_BLUE		= \033[38;5;45m
 RESET					= \033[1;0m
 
 #====<[ Sources: ]>=============================================================
-PROJECT			:= fract-ol
-NAME				:= fractol
-NAME_BNS		:= fractol_bonus
-FT_PRINTF		:= ft_printf
-OBJ_DIR			:= obj
-SRC_DIR			:= src
-BNS_DIR			:= bonus
-RM					:= rm -rf
-INCLUDE 		:= -Iinclude/ -I$(FT_PRINTF)/include -I$(FT_PRINTF)/libft/include
+PROJECT			  := fract-ol
+NAME				  := fractol
+NAME_BNS		  := fractol_bonus
+FT_PRINTF		  := ft_printf
+OBJ_DIR			  := obj
+SRC_DIR			  := src
+BNS_DIR			  := bonus
+RM					  := rm -rf
+INCLUDE 		  := -Iinclude/ -I$(FT_PRINTF)/include -I$(FT_PRINTF)/libft/include
 
 #====<[ Mondatory: ]>===========================================================
-SRC 				:= fractol fractol_menu fractol_window fractals fractol_events \
-							 fractol_utils
+SRC 				  := fractol fractol_menu fractol_window fractals fractol_events \
+                 fractol_utils
 
-OBJ 				:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC)))
-SRC 				:= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
+OBJ 				  := $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC)))
+SRC 				  := $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 
 #====<[ Bonus: ]>===============================================================
-SRC_BNS				:= burning_ship_fractal fractals_bonus fractol_events_bonus \
-							 fractol_menu_bonus
+SRC_BNS			:= burning_ship_fractal fractals_bonus fractol_events_bonus \
+               fractol_menu_bonus
 
 OBJ_BNS			:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_BNS)))
 SRC_BNS			:= $(addprefix $(SRC_DIR)/$(BNS_DIR)/, $(addsuffix .c, $(SRC_BNS)))
