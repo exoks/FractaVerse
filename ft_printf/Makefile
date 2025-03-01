@@ -35,23 +35,23 @@ LIGHT_BLUE		= \033[38;5;45m
 RESET					= \033[1;0m
 
 #====<[ CC compiler: ]>=========================================================
-CC				:= cc
-CFLAGS		:= -Wall -Wextra -Werror
-RM				:= rm -rf
+CC            := cc
+CFLAGS        := -Wall -Wextra -Werror
+RM            := rm -rf
 
 #===<[ Sources: ]>==============================================================
-PROJECT		:= ft_printf
-NAME			:= libftprintf.a
-SRC_DIR		:= src
-OBJ_DIR		:= obj
-LIBFT			:= libft
-INCLUDE		:= -I$(LIBFT)/include -Iinclude
+PROJECT       := ft_printf
+NAME          := libftprintf.a
+SRC_DIR       := src
+OBJ_DIR       := obj
+LIBFT         := libft
+INCLUDE       := -I$(LIBFT)/include -Iinclude
 
-SRC				:= ft_manage_flags.c ft_print_char.c ft_putnbr_base_id.c \
-						 ft_print_str.c ft_putnbr_base_upx.c ft_printf_utils.c
+SRC           := ft_manage_flags.c ft_print_char.c ft_putnbr_base_id.c \
+                 ft_print_str.c ft_putnbr_base_upx.c ft_printf_utils.c
 
-OBJ				:= $(addprefix $(OBJ_DIR)/, ${SRC:.c=.o})
-SRC				:= $(addprefix $(SRC_DIR)/, $(SRC))
+OBJ           := $(addprefix $(OBJ_DIR)/, ${SRC:.c=.o})
+SRC           := $(addprefix $(SRC_DIR)/, $(SRC))
 
 #====<[ Rules: ]>===============================================================
 all: $(NAME)
@@ -62,8 +62,11 @@ $(NAME): $(OBJ) $(OBJ_DIR)/ft_printf.o
 
 bonus: clean $(NAME)
 
+# Rule usage:
+# |=> [ make test CFILE=<file_to_compile_with_libftprintf.a> ]
+
 test:
-	gcc main.c libftprintf.a -Iinclude -Ilibft && ./a.out
+	@$(CC) $(CFLAGS) $(INCLUDE) $(CFILE) $(NAME) -o foo && ./foo
 
 $(OBJ_DIR)/ft_printf.o: ft_printf.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
@@ -104,5 +107,5 @@ re: fclean all
 	
 .create_dirs: $(OBJ_DIR)
 
-.PHONY: all bonus clean fclean re $(LIBFT)
+.PHONY: all bonus clean fclean test re $(LIBFT)
 #===============================================================================
