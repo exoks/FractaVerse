@@ -1,5 +1,5 @@
-### **Fract-ol** ###
-`Fract-ol` is an advanced C-based fractal visualization project that brings mathematical beauty to life using the 42MLX graphics library. It makes exploring mathematical graphics both fun and interactive.
+### **FractaVerse** ###
+`FractaVerse` is an advanced C-based fractal visualization project that brings mathematical beauty to life using the 42MLX graphics library. It makes exploring mathematical graphics both fun and interactive.
 
 - Built on my **`libft`** and **`ft_printf`** projects for optimized formatted output
 - Includes **two usage menus**:
@@ -21,7 +21,7 @@
 ### **Getting Started** : ###
 
 #### **Prerequisites** ####
-Before running `Fract-ol`, ensure you have the following:
+Before running `FractaVerse`, ensure you have the following:
 
 - **`MacOS`** Operating system 
 - The [**42-MiniLibx**](https://harm-smits.github.io/42docs/libs/minilibx) graphics library installed
@@ -31,8 +31,8 @@ Before running `Fract-ol`, ensure you have the following:
 #### **Installation** ####
 1. Clone the repository
 ```sh
-git clone https://github.com/exoks/Fract-ol.git
-cd fract-ol
+git clone https://github.com/exoks/FractaVerse.git
+cd FractaVerse
 ```
 
 2. Compile the project:
@@ -67,7 +67,7 @@ make bonus
   </tr>
 </table>
 
-**Enjoy the fractal experience**
+**Enjoy the Fractal Universe.**
 # include a gif image for one fractal
 ---
 
