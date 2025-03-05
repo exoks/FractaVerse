@@ -1,7 +1,7 @@
 ### **Fract-ol** ###
 `Fract-ol` is an advanced C-based fractal visualization project that brings mathematical beauty to life using the 42MLX graphics library. It makes exploring mathematical graphics both fun and interactive.
 
-- Built on my **libft** and **ft_printf** projects for optimized formatted output
+- Built on my **`libft`** and **`ft_printf`** projects for optimized formatted output
 - Includes **two usage menus**:
   - A **CLI usage menu** displayed in the terminal when running the program. 
   - An **interactive in-program menu** that guides users on how to navigate and use features. 
@@ -23,9 +23,9 @@
 #### **Prerequisites** ####
 Before running `Fract-ol`, ensure you have the following:
 
-- **MacOS** Operating system 
+- **`MacOS`** Operating system 
 - The [**42-MiniLibx**](https://harm-smits.github.io/42docs/libs/minilibx) graphics library installed
-- A C compiler (**gcc** or **clang**)
+- A `C` compiler (**`gcc`** or **`clang`**)
 - **GNUMake** installed
 
 #### **Installation** ####
