@@ -1,4 +1,5 @@
 ### **FractaVerse** ###
+
 `FractaVerse` is an advanced C-based fractal visualization project that brings mathematical beauty to life using the 42MLX graphics library. It makes exploring mathematical graphics both fun and interactive.
 
 - Built on my **`libft`** and **`ft_printf`** projects for optimized formatted output
@@ -68,10 +69,8 @@ make bonus
 </table>
 
 **Enjoy the Fractal Universe.**
-# include a gif image for one fractal
----
 
-#### **Cleanup** ####
+### **Cleanup :** ###
 * To remove Object files, run:
 ```sh
 make clean
