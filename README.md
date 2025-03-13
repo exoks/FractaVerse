@@ -70,6 +70,8 @@ make bonus
 
 **Enjoy the Fractal Universe.**
 
+![Image](https://github.com/user-attachments/assets/2c4b1319-0215-493a-a52d-37ff5206c3d4)
+
 ### **Cleanup :** ###
 * To remove Object files, run:
 ```sh
